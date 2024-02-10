@@ -71,11 +71,13 @@ def get_random_action(state):
     return np.random.choice(avil_actions)
 
 def step(state, action):
+    # 해당 state에서 action을 취했을 때의 보상 뽑기
+    # Write Your Code (reward = ...)
 
-    reward = r_table[state[0], state[1], action]
-    
     action_table = {0:(0,-1), 1:(0,1), 2:(-1,0), 3:(1,0)}
-    next_state = np.array(state)+action_table[action]
+
+    # 취한 action에 따라 next state 결정
+    # Write Your Code (next_state = ...)
     next_state = tuple(next_state)
 
     return next_state, reward
