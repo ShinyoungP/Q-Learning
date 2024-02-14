@@ -80,7 +80,7 @@ def step(state, action):
     action_table = {0:(0,-1), 1:(0,1), 2:(-1,0), 3:(1,0)}
 
     # 취한 action에 따라 next state 결정
-    next_state = np.array(state) + action_table[action]
+    next_state = np.array(state) + action_table[action] # 튜플 형태인 state의 값을 바꾸기 위해 튜플을 numpy array로 바꿔서 값을 더한 후 다시 튜플 형태로 만들어줌
     next_state = tuple(next_state)
 
     return next_state, reward
