@@ -17,6 +17,10 @@ state = (1,0)
 print(q_table[state])
 print(q_table[state[0],state[1]])
 
+# 해당 state에서 가장 큰 q값을 출력
+max_Q = np.max(q_table[state])
+print(max_Q)
+
 # 해당 state에서 가장 큰 q값을 가진 action을 선택
 action = np.argmax(q_table[state])
 print(action)
