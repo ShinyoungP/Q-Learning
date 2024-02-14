@@ -45,10 +45,12 @@ q_table = np.zeros((4,4,4))
 
 #행동 [위 : 0, 아래 : 1, 왼쪽 : 2, 오른쪽 : 3]
 
-#미로 밖으로 나가는 행동을 했을 때의 보상 (미로 밖으로 나가면 보상을 0으로)
+# r_table 채우기
+# 1. 미로 밖으로 나가는 행동을 했을 때의 보상 (미로 밖으로 나가면 보상을 0으로)
+# ex) r_table[0,2,1]은 col이 0이고 row가 2인 state에서 아래로 가는 행동을 했을 때 얻는 보상
 # Write Your Code
 
-#목표 지점으로 도착했을 때의 보상 (목표 지점인 (3,3)에 도착하면 보상을 1000으로)
+# 2. 목표 지점으로 도착했을 때의 보상 (목표 지점인 (3,3)에 도착하면 보상을 1000으로)
 # Write Your Code
 
 #costant
@@ -67,9 +69,9 @@ def get_random_state():
 
 def get_random_action(state):
     
-    action = r_table[state]
-    avil_actions = np.where(action != 0)[0]
-    return np.random.choice(avil_actions)
+    action = r_table[state] # action : 해당 상태에서 수행할 수 있는 모든 행동의 벡터
+    avil_actions = np.where(action != 0)[0] # 그 중 reward가 0이 아닌 행동, 즉 수행할 수 있는 행동을 결정
+    return np.random.choice(avil_actions) # 수행할 수 있는 행동 중 랜덤한 행동 수행
 
 def step(state, action):
     # 해당 state에서 action을 취했을 때의 보상 뽑기
@@ -78,7 +80,7 @@ def step(state, action):
     action_table = {0:(0,-1), 1:(0,1), 2:(-1,0), 3:(1,0)}
 
     # 취한 action에 따라 next state 결정
-    # Write Your Code (next_state = ...)
+    next_state = np.array(state) + action_table[action]
     next_state = tuple(next_state)
 
     return next_state, reward
@@ -86,22 +88,20 @@ def step(state, action):
 def update_Q(state, action, reward, next_state):
 # 시간차 공식과 벨만 방정식을 이용해 Q값 업데이트
     global q_table
-    # Write Your Code
+    # Write Your Code 
 
 # main
 # Q_table 채우기
-log_q_table = []
 for i in range(1000):
     state = get_random_state() 
     action = get_random_action(state)
     next_state, reward = step(state, action)
     update_Q(state, action, reward, next_state)
-    log_q_table.append(q_table.copy())
 
 # 완성한 Q_table로 시작점에서 목적지까지 최단 경로로 이동
 state = (0, 0)
 while True:
-    # Write Your Code
+    # Write Your Code 
     print(state)
     if state == (3, 3):
         break
